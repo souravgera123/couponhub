@@ -1,4 +1,4 @@
 window.COUPONHUB_CONFIG = {
-  SUPABASE_URL: "https://YOUR_PROJECT.supabase.co",
-  SUPABASE_ANON_KEY: "YOUR_SUPABASE_ANON_KEY"
+  SUPABASE_URL: "https://kgzkeavjofaizsezeunr.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_YWuZW8ITd28u5NZmhsbI6w_e-1-jrCL"
 };
