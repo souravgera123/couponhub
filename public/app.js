@@ -18,6 +18,7 @@ async function load() {
   }
 
   coupons = data || [];
+  console.log('COUPON DATA:', coupons);
   render();
 }
 
