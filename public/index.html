@@ -143,15 +143,21 @@
 
     <p id="payText"></p>
 
-    <div class="quantity">
+ <div class="quantity">
 
-      <button id="qtyMinus" type="button">−</button>
+  <button id="qtyMinus" type="button">−</button>
 
-      <b id="qtyValue">1</b>
+  <input
+    id="qtyInput"
+    type="number"
+    min="1"
+    value="1"
+    inputmode="numeric"
+  >
 
-      <button id="qtyPlus" type="button">+</button>
+  <button id="qtyPlus" type="button">+</button>
 
-    </div>
+</div>
 
     <p id="totalText"></p>
 
