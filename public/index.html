@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CouponHub — Digital Deals</title>
+<title>CouponHub — Live Deals</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
-#loginBtn,#orders,#auth{display:none!important}
+#loginBtn,#orders,#auth{
+  display:none!important;
+}
 </style>
 </head>
 
@@ -18,112 +20,82 @@
     <span>✦</span> CouponHub
   </div>
 
-  <nav>
-    <a href="#deals">Deals</a>
-    <a href="#deals">Coupons</a>
-    <a href="#orders">Orders</a>
-  </nav>
-
-  <a href="#deals" class="header-btn">Browse Deals</a>
+  <a href="#deals" class="browse-btn">
+    Browse Deals
+  </a>
 </header>
+
 
 <main>
 
-<section class="hero">
+<!-- TERMS -->
 
-  <div class="hero-left">
+<section class="terms">
 
-    <div class="eyebrow">
-      <span class="pulse"></span>
-      VERIFIED DIGITAL COUPONS
+  <div class="terms-title">
+    <div>
+      <span class="doc-icon">▤</span>
+      <h2>Terms & <span>Conditions</span></h2>
     </div>
 
-    <h1>
-      Save more.<br>
-      <span>Spend less.</span>
-    </h1>
-
-    <p>
-      Get exclusive digital coupons from your favourite brands
-      at unbeatable prices. Pay securely and receive your code instantly.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#deals" class="primary-btn">
-        Explore Deals <b>→</b>
-      </a>
-
-      <div class="secure">
-        <span>✓</span>
-        Instant delivery
-      </div>
-    </div>
-
-    <div class="stats">
-      <div>
-        <strong>70%</strong>
-        <small>Max Savings</small>
-      </div>
-
-      <div>
-        <strong>⚡</strong>
-        <small>Instant Code</small>
-      </div>
-
-      <div>
-        <strong>🔒</strong>
-        <small>Secure Pay</small>
-      </div>
-    </div>
-
+    <small>Please read before purchase</small>
   </div>
 
-  <div class="hero-right">
+  <div class="terms-list">
 
-    <div class="deal-orb"></div>
+    <p>
+      <b>1</b>
+      This is a digital coupon code. No physical product will be shipped.
+    </p>
 
-    <div class="coupon-ticket main-ticket">
-      <div class="ticket-top">
-        <span>COUPONHUB</span>
-        <b>HOT</b>
-      </div>
+    <p>
+      <b>2</b>
+      Each code is unique and can be used only once.
+    </p>
 
-      <div class="ticket-icon">🏷️</div>
+    <p>
+      <b>3</b>
+      We are not responsible if the code doesn't work due to brand restrictions.
+    </p>
 
-      <h3>EXCLUSIVE<br>DEAL</h3>
+    <p>
+      <b>4</b>
+      Coupons may have expiry dates. Please use them before expiry.
+    </p>
 
-      <div class="discount">
-        UP TO <strong>70%</strong> OFF
-      </div>
+    <p>
+      <b>5</b>
+      No refunds or returns are applicable after purchase.
+    </p>
 
-      <div class="ticket-line"></div>
-
-      <div class="ticket-bottom">
-        <span>VERIFIED COUPON</span>
-        <span>⚡ INSTANT</span>
-      </div>
-    </div>
-
-    <div class="mini-ticket ticket-one">
-      🔥 <b>HOT DEAL</b>
-    </div>
-
-    <div class="mini-ticket ticket-two">
-      ⚡ <b>INSTANT CODE</b>
-    </div>
+    <p>
+      <b>6</b>
+      For any issues, contact us on Instagram or email.
+    </p>
 
   </div>
 
 </section>
 
 
-<section class="deals-section" id="deals">
+<!-- LIVE DEALS -->
 
-  <div class="section-heading">
+<section class="deals" id="deals">
+
+  <div class="deals-head">
+
     <div>
-      <div class="section-label">CURATED DEALS</div>
-      <h2>Find your next <span>save.</span></h2>
-      <p>Premium coupons. Better prices. Limited stock.</p>
+      <div class="live-label">
+        ◉ LIVE
+      </div>
+
+      <h1>
+        Live <span>Deals</span>
+      </h1>
+
+      <p>
+        Grab the best offers before they expire!
+      </p>
     </div>
 
     <div class="search-box">
@@ -134,51 +106,56 @@
         autocomplete="off"
       >
     </div>
+
   </div>
+
+
+  <div class="filters">
+
+    <button class="filter active">All</button>
+    <button class="filter">Popular</button>
+    <button class="filter">New</button>
+    <button class="filter">Limited Time</button>
+
+    <button class="sort">
+      ↕ &nbsp; Latest
+    </button>
+
+  </div>
+
 
   <div id="products" class="grid"></div>
 
 </section>
 
 
-<section id="orders">
-  <small>ACCOUNT</small>
-  <h2>My orders</h2>
-  <div id="ordersList">Login to view your orders.</div>
-</section>
-
-
-<div id="auth" class="modal">
-  <div class="box">
-    <button class="x" onclick="hideAuth()">×</button>
-    <h2 id="authTitle">Login</h2>
-    <input id="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-    <button class="primary-btn" id="authAction">Login</button>
-    <p><a href="#" id="switch">Create account</a></p>
-    <p id="authMsg"></p>
-  </div>
-</div>
-
+<!-- PAYMENT -->
 
 <div id="pay" class="modal">
-  <div class="box payment-box">
 
-    <div class="payment-label">SECURE CHECKOUT</div>
+  <div class="box">
+
+    <div class="secure-title">
+      SECURE CHECKOUT
+    </div>
 
     <h2>Complete payment</h2>
 
     <p id="payText"></p>
 
     <div class="quantity">
+
       <button id="qtyMinus" type="button">−</button>
+
       <b id="qtyValue">1</b>
+
       <button id="qtyPlus" type="button">+</button>
+
     </div>
 
     <p id="totalText"></p>
 
-    <button class="primary-btn" id="payAction">
+    <button class="pay-btn" id="payAction">
       Pay securely 🔒
     </button>
 
@@ -187,10 +164,11 @@
     </button>
 
   </div>
+
 </div>
 
-
 </main>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
