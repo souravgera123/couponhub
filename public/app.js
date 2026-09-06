@@ -3,7 +3,7 @@ const sb = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
 
 let coupons = [];
 let selected = null;
-
+let quantity = 1;
 const $ = s => document.querySelector(s);
 
 async function load() {
@@ -71,9 +71,9 @@ async function startPay() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      couponId: selected.id
-    })
-  });
+  couponId: selected.id,
+  quantity: quantity
+})
 
   const d = await r.json();
 
@@ -119,10 +119,16 @@ async function startPay() {
       if (vd.ok) {
         hidePay();
 
-        alert(
-          'Payment successful!\n\nYour coupon code: ' +
-          vd.code
-        );
+        const codes = vd.codes || [vd.code];
+
+const copyText = codes.join('\n');
+
+alert(
+  'Payment successful!\n\nYour coupon codes:\n' +
+  copyText
+);
+
+navigator.clipboard?.writeText(copyText);
 
         load();
       } else {
