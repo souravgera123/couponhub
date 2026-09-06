@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CouponHub — Premium Digital Deals</title>
+<title>CouponHub — Digital Deals</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -14,83 +14,102 @@
 <body>
 
 <header>
-  <b>✦ CouponHub</b>
+  <div class="logo">
+    <span>✦</span> CouponHub
+  </div>
+
   <nav>
     <a href="#deals">Deals</a>
-    <a href="#orders">My Orders</a>
-    <button id="loginBtn">Login</button>
+    <a href="#deals">Coupons</a>
+    <a href="#orders">Orders</a>
   </nav>
+
+  <a href="#deals" class="header-btn">Browse Deals</a>
 </header>
+
+<main>
 
 <section class="hero">
 
-  <div class="hero-content">
+  <div class="hero-left">
 
-    <div class="hero-badge">
-      ⚡ VERIFIED DIGITAL COUPONS
+    <div class="eyebrow">
+      <span class="pulse"></span>
+      VERIFIED DIGITAL COUPONS
     </div>
 
     <h1>
-      Unlock.<br>
-      <span>Save.</span>
-      Repeat.
+      Save more.<br>
+      <span>Spend less.</span>
     </h1>
 
-    <p class="hero-sub">
-      Premium deals. Real savings. Instant digital delivery.
-      Grab exclusive coupons at prices made for smart shoppers.
+    <p>
+      Get exclusive digital coupons from your favourite brands
+      at unbeatable prices. Pay securely and receive your code instantly.
     </p>
 
-    <div class="hero-actions">
-      <a href="#deals" class="btn">
-        Explore Exclusive Deals →
+    <div class="hero-buttons">
+      <a href="#deals" class="primary-btn">
+        Explore Deals <b>→</b>
       </a>
+
+      <div class="secure">
+        <span>✓</span>
+        Instant delivery
+      </div>
     </div>
 
-    <div class="hero-note">
-      🔒 Secure checkout &nbsp; • &nbsp;
-      ⚡ Instant delivery &nbsp; • &nbsp;
-      🎟️ Verified coupons
-    </div>
-
-    <div class="trust-row">
-
-      <div class="trust-item">
-        <b>⚡ Instant Code</b>
-        <span>Your coupon arrives immediately after payment.</span>
+    <div class="stats">
+      <div>
+        <strong>70%</strong>
+        <small>Max Savings</small>
       </div>
 
-      <div class="trust-item">
-        <b>🛡️ Secure Payment</b>
-        <span>Safe and secure checkout experience.</span>
+      <div>
+        <strong>⚡</strong>
+        <small>Instant Code</small>
       </div>
 
-      <div class="trust-item">
-        <b>🔥 Limited Deals</b>
-        <span>Popular coupons can sell out fast.</span>
+      <div>
+        <strong>🔒</strong>
+        <small>Secure Pay</small>
       </div>
-
     </div>
 
   </div>
 
-  <div class="hero-art">
+  <div class="hero-right">
 
-    <div class="floating-card float-one">
-      <strong>🔥 HOT DEAL</strong>
-      Up to 70% OFF
+    <div class="deal-orb"></div>
+
+    <div class="coupon-ticket main-ticket">
+      <div class="ticket-top">
+        <span>COUPONHUB</span>
+        <b>HOT</b>
+      </div>
+
+      <div class="ticket-icon">🏷️</div>
+
+      <h3>EXCLUSIVE<br>DEAL</h3>
+
+      <div class="discount">
+        UP TO <strong>70%</strong> OFF
+      </div>
+
+      <div class="ticket-line"></div>
+
+      <div class="ticket-bottom">
+        <span>VERIFIED COUPON</span>
+        <span>⚡ INSTANT</span>
+      </div>
     </div>
 
-    🏷️
+    <div class="mini-ticket ticket-one">
+      🔥 <b>HOT DEAL</b>
+    </div>
 
-    <strong>
-      SAVE<br>
-      MORE
-    </strong>
-
-    <div class="floating-card float-two">
-      <strong>⚡ INSTANT</strong>
-      Digital delivery
+    <div class="mini-ticket ticket-two">
+      ⚡ <b>INSTANT CODE</b>
     </div>
 
   </div>
@@ -98,27 +117,23 @@
 </section>
 
 
-<section id="deals">
+<section class="deals-section" id="deals">
 
-  <div class="head">
-
+  <div class="section-heading">
     <div>
-      <small>🔥 CURATED FOR YOU</small>
-      <h2>Exclusive Deals</h2>
-      <p class="deals-intro">
-        Limited-stock coupons. Premium savings.
-      </p>
+      <div class="section-label">CURATED DEALS</div>
+      <h2>Find your next <span>save.</span></h2>
+      <p>Premium coupons. Better prices. Limited stock.</p>
     </div>
 
-    <div class="search-wrap">
-      <span class="search-icon">⌕</span>
+    <div class="search-box">
+      <span>⌕</span>
       <input
         id="search"
-        placeholder="Search brands, deals..."
+        placeholder="Search coupons..."
         autocomplete="off"
       >
     </div>
-
   </div>
 
   <div id="products" class="grid"></div>
@@ -129,83 +144,53 @@
 <section id="orders">
   <small>ACCOUNT</small>
   <h2>My orders</h2>
-  <div id="ordersList">
-    Login to view your orders.
-  </div>
+  <div id="ordersList">Login to view your orders.</div>
 </section>
 
 
 <div id="auth" class="modal">
-
   <div class="box">
-
     <button class="x" onclick="hideAuth()">×</button>
-
     <h2 id="authTitle">Login</h2>
-
     <input id="email" placeholder="Email">
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-    >
-
-    <button class="btn" id="authAction">
-      Login
-    </button>
-
-    <p>
-      <a href="#" id="switch">
-        Create account
-      </a>
-    </p>
-
+    <input id="password" type="password" placeholder="Password">
+    <button class="primary-btn" id="authAction">Login</button>
+    <p><a href="#" id="switch">Create account</a></p>
     <p id="authMsg"></p>
-
   </div>
-
 </div>
 
 
 <div id="pay" class="modal">
+  <div class="box payment-box">
 
-  <div class="box">
+    <div class="payment-label">SECURE CHECKOUT</div>
 
     <h2>Complete payment</h2>
 
     <p id="payText"></p>
 
-    <div style="
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:20px;
-      margin:20px 0;
-    ">
-
+    <div class="quantity">
       <button id="qtyMinus" type="button">−</button>
-
       <b id="qtyValue">1</b>
-
       <button id="qtyPlus" type="button">+</button>
-
     </div>
 
     <p id="totalText"></p>
 
-    <button class="btn" id="payAction">
+    <button class="primary-btn" id="payAction">
       Pay securely 🔒
     </button>
 
-    <button onclick="hidePay()">
+    <button class="cancel-btn" onclick="hidePay()">
       Cancel
     </button>
 
   </div>
-
 </div>
 
+
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
