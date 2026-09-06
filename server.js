@@ -209,8 +209,49 @@ app.post('/api/payment/verify', async (req, res) => {
         error: 'Coupon unavailable'
       });
     }
+    let codes = [];
 
-    const code = c.code;
+    try {
+      codes = JSON.parse(c.code);
+    } catch {
+      codes = [c.code];
+    }
+
+    if (!Array.isArray(codes)) {
+      codes = [c.code];
+    }
+
+    codes = codes
+      .map(x => String(x).trim())
+      .filter(Boolean);
+
+    if (codes.length < 1) {
+      return res.status(400).json({
+        error: 'No coupon codes available'
+      });
+    }
+
+    const code = codes[0];
+    const remainingCodes = codes.slice(1);
+
+    const { data: claimed, error: claimError } =
+      await supabaseAdmin
+        .from('coupons')
+        .update({
+          code: JSON.stringify(remainingCodes),
+          stock: remainingCodes.length,
+          active: remainingCodes.length > 0
+        })
+        .eq('id', c.id)
+        .eq('code', c.code)
+        .select()
+        .single();
+
+    if (claimError || !claimed) {
+      return res.status(409).json({
+        error: 'Coupon was just purchased by another customer. Please retry.'
+      });
+    }
 
     await supabaseAdmin
       .from('orders')
@@ -221,13 +262,10 @@ app.post('/api/payment/verify', async (req, res) => {
       })
       .eq('id', dbOrderId);
 
-    await supabaseAdmin
-      .from('coupons')
-      .update({
-        stock: Math.max(0, c.stock - 1),
-        active: c.stock - 1 > 0
-      })
-      .eq('id', c.id);
+    res.json({
+      ok: true,
+      code
+    });
 
     res.json({
       ok: true,
