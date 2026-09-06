@@ -31,13 +31,13 @@ app.get('/api/config',(req,res)=>res.json({razorpayKeyId:process.env.RAZORPAY_KE
 
 app.post('/api/payment/create',async(req,res)=>{
   try{
-    const u=await userFromReq(req); if(!u)return res.status(401).json({error:'Login required'});
+    
     const {couponId}=req.body;
     const {data:c,error}=await supabaseAdmin.from('coupons').select('*').eq('id',couponId).eq('active',true).single();
     if(error||!c||c.stock<1)return res.status(400).json({error:'Coupon unavailable'});
     if(!razorpay)return res.status(503).json({error:'Razorpay is not configured'});
     const order=await razorpay.orders.create({amount:c.selling_price*100,currency:'INR',receipt:`ch_${Date.now()}`});
-    const {data:o,error:oe}=await supabaseAdmin.from('orders').insert({user_id:u.id,coupon_id:c.id,amount:c.selling_price,status:'created',razorpay_order_id:order.id}).select().single();
+    const {data:o,error:oe}=await supabaseAdmin.from('orders').insert({,coupon_id:c.id,amount:c.selling_price,status:'created',razorpay_order_id:order.id}).select().single();
     if(oe)throw oe;
     res.json({orderId:order.id,amount:order.amount,currency:order.currency,dbOrderId:o.id,keyId:process.env.RAZORPAY_KEY_ID});
   }catch(e){console.error(e);res.status(500).json({error:'Unable to create payment'})}
@@ -45,11 +45,11 @@ app.post('/api/payment/create',async(req,res)=>{
 
 app.post('/api/payment/verify',async(req,res)=>{
   try{
-    const u=await userFromReq(req); if(!u)return res.status(401).json({error:'Login required'});
+    
     const {razorpay_order_id,razorpay_payment_id,razorpay_signature,dbOrderId}=req.body;
     const expected=crypto.createHmac('sha256',process.env.RAZORPAY_KEY_SECRET).update(`${razorpay_order_id}|${razorpay_payment_id}`).digest('hex');
     if(!crypto.timingSafeEqual(Buffer.from(expected),Buffer.from(razorpay_signature)))return res.status(400).json({error:'Invalid signature'});
-    const {data:o}=await supabaseAdmin.from('orders').select('*,coupons(*)').eq('id',dbOrderId).eq('user_id',u.id).single();
+    const {data:o}=await supabaseAdmin.from('orders').select('*,coupons(*)').eq('id',dbOrderId)..single();
     if(!o)return res.status(404).json({error:'Order not found'});
     if(o.status==='paid')return res.json({ok:true,code:o.coupon_code});
     const code=o.coupons.code;
