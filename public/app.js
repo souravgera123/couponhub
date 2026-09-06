@@ -73,7 +73,7 @@ async function startPay() {
     },
     body: JSON.stringify({
   couponId: selected.id,
-  quantity: Number($('#quantity').value),
+  quantity: quantity,
 })
 });
   const d = await r.json();
