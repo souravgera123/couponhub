@@ -42,7 +42,7 @@ function render() {
             <span class="old">
               ₹${c.original_price.toLocaleString('en-IN')}
             </span>
-          </div>
+          <div>Stock: ${c.stock}</div>
           <button class="buy" onclick="buy('${c.id}')">
             Buy Coupon
           </button>
