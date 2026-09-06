@@ -12,7 +12,9 @@ const razorpay=(process.env.RAZORPAY_KEY_ID&&process.env.RAZORPAY_KEY_SECRET)
 
 app.use(express.json({verify:(req,res,buf)=>{req.rawBody=buf}}));
 app.use(express.static('public'));
-
+app.get('/', (req, res) => {
+  res.sendFile(process.cwd() + '/public/index.html');
+});
 async function userFromReq(req){
   const auth=req.headers.authorization||'';
   if(!auth.startsWith('Bearer ')) return null;
