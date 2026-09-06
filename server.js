@@ -208,7 +208,7 @@ const qty = Math.max(1, Number(quantity) || 1);
       .eq('id', o.coupon_id)
       .single();
 
-    if (ce || !c || c.stock < 1) {
+    if (ce || !c || c.stock < qty) {
       return res.status(400).json({
         error: 'Coupon unavailable'
       });
@@ -235,46 +235,47 @@ const qty = Math.max(1, Number(quantity) || 1);
       });
     }
 
-    const code = codes[0];
-    const remainingCodes = codes.slice(1);
+    const selectedCodes = codes.slice(0, qty);
+const remainingCodes = codes.slice(qty);
 
-    const { data: claimed, error: claimError } =
-      await supabaseAdmin
-        .from('coupons')
-        .update({
-          code: JSON.stringify(remainingCodes),
-          stock: remainingCodes.length,
-          active: remainingCodes.length > 0
-        })
-        .eq('id', c.id)
-        .eq('code', c.code)
-        .select()
-        .single();
+if (selectedCodes.length < qty) {
+  return res.status(400).json({
+    error: 'Not enough coupon codes available'
+  });
+}
 
-    if (claimError || !claimed) {
-      return res.status(409).json({
-        error: 'Coupon was just purchased by another customer. Please retry.'
-      });
-    }
+const { data: claimed, error: claimError } =
+  await supabaseAdmin
+    .from('coupons')
+    .update({
+      code: JSON.stringify(remainingCodes),
+      stock: remainingCodes.length,
+      active: remainingCodes.length > 0
+    })
+    .eq('id', c.id)
+    .eq('code', c.code)
+    .select()
+    .single();
 
-    await supabaseAdmin
-      .from('orders')
-      .update({
-        status: 'paid',
-        razorpay_payment_id,
-        coupon_code: code
-      })
-      .eq('id', dbOrderId);
+if (claimError || !claimed) {
+  return res.status(409).json({
+    error: 'Coupon was just purchased by another customer. Please retry.'
+  });
+}
 
-    res.json({
-      ok: true,
-      code
-    });
+await supabaseAdmin
+  .from('orders')
+  .update({
+    status: 'paid',
+    razorpay_payment_id,
+    coupon_code: selectedCodes.join('\n')
+  })
+  .eq('id', dbOrderId);
 
-    res.json({
-      ok: true,
-      code
-    });
+res.json({
+  ok: true,
+  codes: selectedCodes
+});
   } catch (e) {
     console.error(e);
 
