@@ -46,8 +46,8 @@
     <input id="original" type="number" placeholder="Original price">
     <input id="selling" type="number" placeholder="Selling price">
 
-    <input id="code" placeholder="Coupon code">
-    <input id="stock" type="number" value="1" placeholder="Stock">
+    <textarea id="code" placeholder="Multiple coupon codes (one per line)" rows="5"></textarea>
+    <input id="stock" type="number" value="1" placeholder="Stock" readonly>
 
     <button class="btn" id="add">Add Coupon</button>
   </div>
@@ -170,17 +170,28 @@ async function load() {
 
 $('#add').onclick = async () => {
 
-  const v = {
-    brand: $('#brand').value,
-    title: $('#title').value,
-    category: $('#category').value,
-    description: $('#desc').value,
-    original_price: +$('#original').value,
-    selling_price: +$('#selling').value,
-    code: $('#code').value,
-    stock: +$('#stock').value,
-    active: true
-  };
+  const codes = $('#code').value
+  .split('\n')
+  .map(x => x.trim())
+  .filter(Boolean);
+
+if (codes.length === 0) {
+  alert('At least one coupon code required!');
+  return;
+}
+
+const v = {
+  brand: $('#brand').value,
+  title: $('#title').value,
+  category: $('#category').value,
+  description: $('#desc').value,
+  original_price: +$('#original').value,
+  selling_price: +$('#selling').value,
+  code: JSON.stringify(codes),
+  stock: codes.length,
+  active: true
+};
+  
 
   const { error } =
     await sb.from('coupons').insert(v);
