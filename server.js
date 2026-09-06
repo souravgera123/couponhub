@@ -73,7 +73,8 @@ app.get('/api/config', (req, res) => {
 // Create Razorpay order - CUSTOMER DOES NOT NEED LOGIN
 app.post('/api/payment/create', async (req, res) => {
   try {
-    const { couponId } = req.body;
+    const { couponId, quantity } = req.body;
+const qty = Math.max(1, Number(quantity) || 1);
 
     if (!couponId) {
       return res.status(400).json({
@@ -88,7 +89,7 @@ app.post('/api/payment/create', async (req, res) => {
       .eq('active', true)
       .single();
 
-    if (error || !c || c.stock < 1) {
+    if (error || !c || c.stock < qty) {
       return res.status(400).json({
         error: 'Coupon unavailable'
       });
@@ -101,7 +102,7 @@ app.post('/api/payment/create', async (req, res) => {
     }
 
     const order = await razorpay.orders.create({
-      amount: Math.round(c.selling_price * 100),
+      amount: Math.round(c.selling_price * qty * 100),
       currency: 'INR',
       receipt: `ch_${Date.now()}`
     });
@@ -110,7 +111,7 @@ app.post('/api/payment/create', async (req, res) => {
       .from('orders')
       .insert({
         coupon_id: c.id,
-        amount: c.selling_price,
+        amount: c.selling_price * qty,
         
         status: 'created',
         razorpay_order_id: order.id
@@ -146,11 +147,14 @@ app.post('/api/payment/create', async (req, res) => {
 app.post('/api/payment/verify', async (req, res) => {
   try {
     const {
-      razorpay_order_id,
-      razorpay_payment_id,
-      razorpay_signature,
-      dbOrderId
-    } = req.body;
+  razorpay_order_id,
+  razorpay_payment_id,
+  razorpay_signature,
+  dbOrderId,
+  quantity
+} = req.body;
+
+const qty = Math.max(1, Number(quantity) || 1);
 
     if (
       !razorpay_order_id ||
