@@ -111,7 +111,7 @@ app.post('/api/payment/create', async (req, res) => {
       .insert({
         coupon_id: c.id,
         amount: c.selling_price,
-        currency: 'INR',
+        
         status: 'created',
         razorpay_order_id: order.id
       })
