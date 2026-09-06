@@ -3,163 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CouponHub — Smart Deals, Better Savings</title>
-
+<title>CouponHub — Premium Digital Deals</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
-#loginBtn,
-#orders,
-#auth{
-  display:none !important;
-}
-
-.hero{
-  position:relative;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-}
-
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 13px;
-  border:1px solid rgba(255,105,70,.25);
-  border-radius:50px;
-  background:rgba(255,90,54,.08);
-  color:#ff704d;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
-.hero h1{
-  max-width:800px;
-}
-
-.hero-sub{
-  max-width:600px;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-.hero-note{
-  margin-top:18px;
-  color:#666;
-  font-size:13px;
-}
-
-.hero-art{
-  position:relative;
-}
-
-.floating-card{
-  position:absolute;
-  padding:13px 17px;
-  border-radius:14px;
-  background:rgba(15,15,17,.85);
-  border:1px solid rgba(255,255,255,.13);
-  box-shadow:0 15px 35px rgba(0,0,0,.3);
-  backdrop-filter:blur(12px);
-  font-size:13px;
-  text-align:left;
-}
-
-.floating-card strong{
-  display:block;
-  font-size:15px;
-  margin-bottom:4px;
-}
-
-.float-one{
-  left:-35px;
-  top:45px;
-}
-
-.float-two{
-  right:-25px;
-  bottom:45px;
-}
-
-.deals-intro{
-  color:#777;
-  margin-top:-10px;
-  margin-bottom:25px;
-}
-
-.search-wrap{
-  position:relative;
-}
-
-.search-wrap input{
-  padding-left:42px;
-}
-
-.search-icon{
-  position:absolute;
-  left:15px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#777;
-}
-
-.trust-row{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:30px;
-}
-
-.trust-item{
-  padding:18px;
-  border-radius:16px;
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.07);
-}
-
-.trust-item b{
-  display:block;
-  margin-bottom:5px;
-}
-
-.trust-item span{
-  color:#777;
-  font-size:13px;
-}
-
-@media(max-width:750px){
-  .hero-actions{
-    width:100%;
-  }
-
-  .hero-actions .btn{
-    width:100%;
-    text-align:center;
-  }
-
-  .float-one{
-    left:8px;
-    top:25px;
-  }
-
-  .float-two{
-    right:8px;
-    bottom:25px;
-  }
-
-  .trust-row{
-    grid-template-columns:1fr;
-  }
-}
+#loginBtn,#orders,#auth{display:none!important}
 </style>
 </head>
 
@@ -167,15 +15,12 @@
 
 <header>
   <b>✦ CouponHub</b>
-
   <nav>
     <a href="#deals">Deals</a>
     <a href="#orders">My Orders</a>
     <button id="loginBtn">Login</button>
   </nav>
 </header>
-
-<main>
 
 <section class="hero">
 
@@ -186,42 +31,45 @@
     </div>
 
     <h1>
-      Pay less.<br>
-      <span>Save more.</span>
+      Unlock.<br>
+      <span>Save.</span>
+      Repeat.
     </h1>
 
     <p class="hero-sub">
-      Discover amazing digital coupons at special prices.
-      Pay securely and receive your coupon codes instantly.
+      Premium deals. Real savings. Instant digital delivery.
+      Grab exclusive coupons at prices made for smart shoppers.
     </p>
 
     <div class="hero-actions">
       <a href="#deals" class="btn">
-        Explore Deals →
+        Explore Exclusive Deals →
       </a>
     </div>
 
     <div class="hero-note">
-      🔒 Secure payment &nbsp; • &nbsp;
+      🔒 Secure checkout &nbsp; • &nbsp;
       ⚡ Instant delivery &nbsp; • &nbsp;
       🎟️ Verified coupons
     </div>
 
     <div class="trust-row">
+
       <div class="trust-item">
-        <b>⚡ Instant Delivery</b>
-        <span>Get your coupon after successful payment.</span>
+        <b>⚡ Instant Code</b>
+        <span>Your coupon arrives immediately after payment.</span>
       </div>
 
       <div class="trust-item">
-        <b>🛡️ Secure Checkout</b>
-        <span>Payments are processed securely.</span>
+        <b>🛡️ Secure Payment</b>
+        <span>Safe and secure checkout experience.</span>
       </div>
 
       <div class="trust-item">
-        <b>🔥 Real Savings</b>
-        <span>Grab discounted coupons before stock runs out.</span>
+        <b>🔥 Limited Deals</b>
+        <span>Popular coupons can sell out fast.</span>
       </div>
+
     </div>
 
   </div>
@@ -229,20 +77,20 @@
   <div class="hero-art">
 
     <div class="floating-card float-one">
-      <strong>🔥 Hot Deal</strong>
-      Save up to 70%
+      <strong>🔥 HOT DEAL</strong>
+      Up to 70% OFF
     </div>
 
     🏷️
 
     <strong>
-      UP TO<br>
-      70% OFF
+      SAVE<br>
+      MORE
     </strong>
 
     <div class="floating-card float-two">
-      <strong>⚡ Instant Code</strong>
-      Delivered after payment
+      <strong>⚡ INSTANT</strong>
+      Digital delivery
     </div>
 
   </div>
@@ -255,10 +103,10 @@
   <div class="head">
 
     <div>
-      <small>🔥 TOP PICKS</small>
-      <h2>Grab the best deals</h2>
+      <small>🔥 CURATED FOR YOU</small>
+      <h2>Exclusive Deals</h2>
       <p class="deals-intro">
-        Limited-stock coupons at prices you'll love.
+        Limited-stock coupons. Premium savings.
       </p>
     </div>
 
@@ -266,7 +114,7 @@
       <span class="search-icon">⌕</span>
       <input
         id="search"
-        placeholder="Search coupons..."
+        placeholder="Search brands, deals..."
         autocomplete="off"
       >
     </div>
@@ -286,10 +134,7 @@
   </div>
 </section>
 
-</main>
 
-
-<!-- LOGIN MODAL -->
 <div id="auth" class="modal">
 
   <div class="box">
@@ -323,7 +168,6 @@
 </div>
 
 
-<!-- PAYMENT MODAL -->
 <div id="pay" class="modal">
 
   <div class="box">
@@ -340,15 +184,11 @@
       margin:20px 0;
     ">
 
-      <button id="qtyMinus" type="button">
-        −
-      </button>
+      <button id="qtyMinus" type="button">−</button>
 
       <b id="qtyValue">1</b>
 
-      <button id="qtyPlus" type="button">
-        +
-      </button>
+      <button id="qtyPlus" type="button">+</button>
 
     </div>
 
