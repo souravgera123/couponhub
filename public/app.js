@@ -57,8 +57,14 @@ function buy(id) {
 
   if (!selected) return;
 
+  quantity = 1;
+  $('#qtyValue').textContent = '1';
+
   $('#payText').textContent =
     `${selected.title} — ₹${selected.selling_price}`;
+
+  $('#totalText').textContent =
+    `Total: ₹${selected.selling_price.toLocaleString('en-IN')}`;
 
   $('#pay').classList.add('show');
 }
@@ -127,12 +133,13 @@ const copyText = codes.join('\n');
 
 alert(
   'Payment successful!\n\nYour coupon codes:\n' +
-  copyText
+  copyText +
+  '\n\n✅ Codes copied automatically!'
 );
 
 navigator.clipboard?.writeText(copyText);
 
-        load();
+load();
       } else {
         alert(vd.error || 'Payment verification failed');
       }
