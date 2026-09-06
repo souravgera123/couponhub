@@ -709,4 +709,212 @@ nav a:hover{
   .card{
     border-radius:19px;
   }
+}/* ===== FIT EVERYTHING TO SCREEN ===== */
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden !important;
+}
+
+body{
+  min-height:100vh;
+}
+
+/* Compact Header */
+header{
+  height:60px !important;
+  padding:0 5% !important;
+}
+
+.logo{
+  font-size:20px !important;
+}
+
+nav{
+  gap:20px !important;
+}
+
+nav a{
+  font-size:12px;
+}
+
+/* Hide unnecessary navigation */
+nav a[href="#orders"]{
+  display:none;
+}
+
+/* ===== ONE SCREEN HERO ===== */
+
+.hero{
+  height:calc(100vh - 60px) !important;
+  min-height:0 !important;
+  padding:25px 5% !important;
+  grid-template-columns:1fr 0.75fr !important;
+  gap:35px !important;
+  overflow:hidden !important;
+}
+
+/* Less text */
+.hero h1{
+  font-size:clamp(45px,6vw,70px) !important;
+  margin:15px 0 !important;
+  letter-spacing:-4px !important;
+}
+
+.hero p{
+  font-size:14px !important;
+  line-height:1.5 !important;
+  max-width:480px !important;
+}
+
+.hero-buttons{
+  margin-top:20px !important;
+}
+
+.stats{
+  display:none !important;
+}
+
+/* Smaller visual */
+.hero-right{
+  height:100% !important;
+  max-height:400px !important;
+}
+
+.coupon-ticket{
+  width:260px !important;
+  height:310px !important;
+}
+
+.ticket-one,
+.ticket-two{
+  display:none !important;
+}
+
+.deal-orb{
+  width:250px !important;
+  height:250px !important;
+}
+
+/* Deals hidden from first screen */
+.deals-section{
+  display:none !important;
+}
+
+/* Orders hidden */
+#orders{
+  display:none !important;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media(max-width:750px){
+
+  html,
+  body{
+    height:100%;
+    overflow:hidden !important;
+  }
+
+  header{
+    height:58px !important;
+    padding:0 5% !important;
+  }
+
+  .header-btn{
+    padding:8px 12px !important;
+    font-size:10px !important;
+  }
+
+  .hero{
+    height:calc(100vh - 58px) !important;
+    min-height:0 !important;
+    padding:28px 6% !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    gap:20px !important;
+  }
+
+  .hero-left{
+    width:100%;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-size:8px !important;
+    padding:7px 11px !important;
+  }
+
+  .hero h1{
+    font-size:48px !important;
+    line-height:.92 !important;
+    letter-spacing:-3px !important;
+    margin:14px 0 !important;
+  }
+
+  .hero p{
+    font-size:13px !important;
+    line-height:1.45 !important;
+    max-width:360px !important;
+    margin:auto !important;
+  }
+
+  .hero-buttons{
+    margin-top:18px !important;
+    display:block !important;
+  }
+
+  .primary-btn{
+    width:auto !important;
+    padding:12px 18px !important;
+    font-size:12px !important;
+  }
+
+  .secure{
+    display:none !important;
+  }
+
+  .hero-right{
+    width:100%;
+    height:230px !important;
+    min-height:230px !important;
+    max-height:230px !important;
+  }
+
+  .coupon-ticket{
+    width:205px !important;
+    height:245px !important;
+    padding:18px !important;
+  }
+
+  .ticket-icon{
+    margin-top:20px !important;
+    font-size:42px !important;
+  }
+
+  .coupon-ticket h3{
+    font-size:24px !important;
+  }
+
+  .discount strong{
+    font-size:20px !important;
+  }
+
+  .ticket-line{
+    margin:18px 0 12px !important;
+  }
+
+  .deal-orb{
+    width:180px !important;
+    height:180px !important;
+  }
+
+  .ticket-one,
+  .ticket-two{
+    display:none !important;
+  }
 }
