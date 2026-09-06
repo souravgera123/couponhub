@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CouponHub</title><link rel="stylesheet" href="style.css"></head><body>
+<header><b>✦ CouponHub</b><nav><a href="#deals">Deals</a><a href="#orders">My Orders</a><button id="loginBtn">Login</button></nav></header>
+<section class="hero"><div><small>VERIFIED DIGITAL COUPONS</small><h1>Save more with <span>CouponHub.</span></h1><p>Buy verified coupons and get your digital code instantly after payment.</p><a href="#deals" class="btn">Explore deals</a></div><div class="hero-art">🏷️<strong>UP TO<br>70% OFF</strong></div></section>
+<section id="deals"><div class="head"><div><small>TOP PICKS</small><h2>Popular coupons</h2></div><input id="search" placeholder="Search coupons..."></div><div id="products" class="grid"></div></section>
+<section id="orders"><small>ACCOUNT</small><h2>My orders</h2><div id="ordersList">Login to view your orders.</div></section>
+<div id="auth" class="modal"><div class="box"><button class="x" onclick="hideAuth()">×</button><h2 id="authTitle">Login</h2><input id="email" placeholder="Email"><input id="password" type="password" placeholder="Password"><button class="btn" id="authAction">Login</button><p><a href="#" id="switch">Create account</a></p><p id="authMsg"></p></div></div>
+<div id="pay" class="modal"><div class="box"><h2>Complete payment</h2><p id="payText"></p><button class="btn" id="payAction">Pay securely</button><button onclick="hidePay()">Cancel</button></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="app.js"></script></body></html>
