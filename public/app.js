@@ -250,17 +250,48 @@ if (qtyInput) {
 
     if (!selected) return;
 
+    const stock =
+      Number(selected.stock || 0);
+
+    if (qtyInput.value === '') {
+      return;
+    }
+
+    let value =
+      Number(qtyInput.value);
+
+    if (!Number.isFinite(value)) {
+      return;
+    }
+
+    if (value > stock) {
+      value = stock;
+      qtyInput.value = stock;
+    }
+
+    quantity = value;
+
+    const price =
+      Number(selected.selling_price || 0);
+
+    $('#totalText').textContent =
+      `Total: ₹${(
+        price * quantity
+      ).toLocaleString('en-IN')}`;
+  };
+
+
+  qtyInput.onblur = () => {
+
+    if (!selected) return;
+
     let value =
       Number(qtyInput.value);
 
     const stock =
       Number(selected.stock || 0);
 
-    if (!Number.isFinite(value)) {
-      value = 1;
-    }
-
-    if (value < 1) {
+    if (!Number.isFinite(value) || value < 1) {
       value = 1;
     }
 
@@ -270,21 +301,9 @@ if (qtyInput) {
 
     quantity = value;
 
+    qtyInput.value = value;
+
     updateTotal();
-  };
-
-
-  qtyInput.onblur = () => {
-
-    if (!selected) return;
-
-    if (
-      !qtyInput.value ||
-      Number(qtyInput.value) < 1
-    ) {
-      quantity = 1;
-      updateTotal();
-    }
   };
 }
 
