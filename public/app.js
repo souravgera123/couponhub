@@ -127,17 +127,69 @@ quantity: quantity
       if (vd.ok) {
         hidePay();
 
-        const codes = vd.codes || [vd.code];
-
+const codes = vd.codes || [vd.code];
 const copyText = codes.join('\n');
 
-alert(
-  'Payment successful!\n\nYour coupon codes:\n' +
-  copyText +
-  '\n\n✅ Codes copied automatically!'
-);
+const success = document.createElement('div');
 
-navigator.clipboard?.writeText(copyText);
+success.style.cssText = `
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  padding:20px;
+`;
+
+success.innerHTML = `
+  <div style="
+    background:#fff;
+    border-radius:18px;
+    padding:24px;
+    max-width:420px;
+    width:100%;
+    text-align:center;
+  ">
+    <h2>Payment successful! 🎉</h2>
+
+    <p>Your coupon codes:</p>
+
+    <pre id="successCodes" style="
+      white-space:pre-wrap;
+      background:#f5f5f5;
+      padding:14px;
+      border-radius:10px;
+      text-align:left;
+    "></pre>
+
+    <button id="copyAllCodes" class="btn" type="button">
+      📋 Copy All Codes
+    </button>
+
+    <button id="closeSuccess" type="button" style="margin-left:8px">
+      Close
+    </button>
+  </div>
+`;
+
+document.body.appendChild(success);
+
+document.getElementById('successCodes').textContent = copyText;
+
+document.getElementById('copyAllCodes').onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(copyText);
+    document.getElementById('copyAllCodes').textContent = '✅ Copied!';
+  } catch {
+    alert('Copy failed. Please copy the codes manually.');
+  }
+};
+
+document.getElementById('closeSuccess').onclick = () => {
+  success.remove();
+};
 
 load();
       } else {
