@@ -111,7 +111,8 @@ async function startPay() {
         },
         body: JSON.stringify({
           ...resp,
-          dbOrderId: d.dbOrderId
+          dbOrderId: d.dbOrderId,
+quantity: quantity
         })
       });
 
@@ -147,6 +148,19 @@ function hidePay() {
 
 $('#payAction').onclick = startPay;
 $('#search').oninput = render;
+$('#qtyMinus').onclick = () => {
+  quantity = Math.max(1, quantity - 1);
+  $('#qtyValue').textContent = quantity;
+  $('#totalText').textContent =
+    `Total: ₹${(selected.selling_price * quantity).toLocaleString('en-IN')}`;
+};
+
+$('#qtyPlus').onclick = () => {
+  quantity = Math.min(selected.stock, quantity + 1);
+  $('#qtyValue').textContent = quantity;
+  $('#totalText').textContent =
+    `Total: ₹${(selected.selling_price * quantity).toLocaleString('en-IN')}`;
+};
 
 sb.channel('public-live')
   .on(
