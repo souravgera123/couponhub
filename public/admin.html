@@ -136,13 +136,17 @@ async function load() {
     (coupons || []).map(x => `
       <div class="order">
         <b>${x.title}</b>
-        • ${x.category}
-        • ₹${x.selling_price}
-        • stock ${x.stock}
+• ${x.category}
+• ₹${x.selling_price}
+• stock ${x.stock}
 
-        <button onclick="del('${x.id}')">
-          Delete
-        </button>
+<button onclick="editStock('${x.id}')">
+  Edit Stock
+</button>
+
+<button onclick="del('${x.id}')">
+  Delete
+</button>
       </div>
     `).join('');
 
@@ -203,7 +207,116 @@ const v = {
     load();
   }
 };
+window.editStock = async id => {
 
+  const { data: coupon, error: fetchError } = await sb
+    .from('coupons')
+    .select('code')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) {
+    alert(fetchError.message);
+    return;
+  }
+
+  let codes = [];
+
+  try {
+    codes = JSON.parse(coupon.code || '[]');
+
+    if (!Array.isArray(codes)) {
+      throw new Error();
+    }
+  } catch {
+    alert('Coupon codes data is invalid.');
+    return;
+  }
+
+  const newCodesText = prompt(
+    `Current stock: ${codes.length}\n\n` +
+    `Enter NEW coupon codes to ADD.\n` +
+    `One code per line.\n\n` +
+    `Leave empty if you only want to decrease stock.`
+  );
+
+  if (newCodesText === null) return;
+
+  const newCodes = newCodesText
+    .split('\n')
+    .map(x => x.trim())
+    .filter(Boolean);
+
+  const existingCodes = new Set(codes);
+
+  const duplicateCodes = newCodes.filter(
+    code => existingCodes.has(code)
+  );
+
+  if (duplicateCodes.length > 0) {
+    alert(
+      'Duplicate coupon code found:\n\n' +
+      duplicateCodes.join('\n')
+    );
+    return;
+  }
+
+  const uniqueNewCodes = [];
+
+  for (const code of newCodes) {
+    if (!uniqueNewCodes.includes(code)) {
+      uniqueNewCodes.push(code);
+    }
+  }
+
+  codes = [...codes, ...uniqueNewCodes];
+
+  const removeText = prompt(
+    `Stock after adding new codes: ${codes.length}\n\n` +
+    `How many OLD/available codes do you want to REMOVE from the END?\n\n` +
+    `Enter 0 to keep all ${codes.length} codes.`
+  );
+
+  if (removeText === null) return;
+
+  const removeCount = Number(removeText);
+
+  if (
+    !Number.isInteger(removeCount) ||
+    removeCount < 0 ||
+    removeCount > codes.length
+  ) {
+    alert(
+      `Enter a whole number between 0 and ${codes.length}.`
+    );
+    return;
+  }
+
+  if (removeCount > 0) {
+    codes = codes.slice(0, codes.length - removeCount);
+  }
+
+  const { error } = await sb
+    .from('coupons')
+    .update({
+      code: JSON.stringify(codes),
+      stock: codes.length,
+      active: codes.length > 0
+    })
+    .eq('id', id);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert(
+    `Stock updated successfully!\n\n` +
+    `New stock: ${codes.length}`
+  );
+
+  load();
+};
 window.del = async id => {
 
   if (!confirm('Delete coupon?')) return;
