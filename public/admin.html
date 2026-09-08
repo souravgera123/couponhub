@@ -139,7 +139,9 @@ async function load() {
 • ${x.category}
 • ₹${x.selling_price}
 • stock ${x.stock}
-
+<button onclick="editCoupon('${x.id}')">
+  Edit Coupon
+</button>
 <button onclick="editStock('${x.id}')">
   Edit Stock
 </button>
@@ -206,6 +208,78 @@ const v = {
     alert('Coupon added successfully!');
     load();
   }
+};window.editCoupon = async id => {
+
+  const { data: coupon, error: fetchError } = await sb
+    .from('coupons')
+    .select('brand, title, category, description, original_price, selling_price')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) {
+    alert(fetchError.message);
+    return;
+  }
+
+  const brand = prompt('Brand:', coupon.brand || '');
+  if (brand === null) return;
+
+  const title = prompt('Coupon Name / Title:', coupon.title || '');
+  if (title === null) return;
+
+  const category = prompt('Category:', coupon.category || '');
+  if (category === null) return;
+
+  const description = prompt(
+    'Description:',
+    coupon.description || ''
+  );
+  if (description === null) return;
+
+  const originalPrice = prompt(
+    'Original Price:',
+    coupon.original_price ?? ''
+  );
+  if (originalPrice === null) return;
+
+  const sellingPrice = prompt(
+    'Selling Price:',
+    coupon.selling_price ?? ''
+  );
+  if (sellingPrice === null) return;
+
+  const original = Number(originalPrice);
+  const selling = Number(sellingPrice);
+
+  if (
+    !Number.isFinite(original) ||
+    !Number.isFinite(selling) ||
+    original < 0 ||
+    selling < 0
+  ) {
+    alert('Please enter valid prices.');
+    return;
+  }
+
+  const { error } = await sb
+    .from('coupons')
+    .update({
+      brand: brand.trim(),
+      title: title.trim(),
+      category: category.trim(),
+      description: description.trim(),
+      original_price: original,
+      selling_price: selling
+    })
+    .eq('id', id);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert('Coupon details updated successfully!');
+  load();
 };
 window.editStock = async id => {
 
